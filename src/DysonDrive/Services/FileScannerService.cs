@@ -2,9 +2,9 @@
 
 namespace DysonDrive.Services;
 
-public class FileScannerService
+public static class FileScannerService
 {
-    public FileNodeModel ScanDirectory(string path)
+    public static FileNodeModel ScanDirectory(string path)
     {
         var rootInfo = new DirectoryInfo(path);
 
@@ -21,7 +21,7 @@ public class FileScannerService
         return rootNode;
     }
 
-    private void ScanRecursive(DirectoryInfo dirInfo, FileNodeModel parentNode)
+    private static void ScanRecursive(DirectoryInfo dirInfo, FileNodeModel parentNode)
     {
         try
         {

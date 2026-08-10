@@ -4,7 +4,6 @@ namespace DysonDrive.Services;
 
 public class DysonDriveWatcher
 {
-    private readonly FileSystemWatcher _watcher;
     private readonly ConcurrentDictionary<string, DateTime> _eventCache = new();
 
     public event Action<string>? OnCreated;
@@ -14,7 +13,7 @@ public class DysonDriveWatcher
 
     public DysonDriveWatcher(string path)
     {
-        _watcher = new FileSystemWatcher(path)
+        FileSystemWatcher watcher = new(path)
         {
             IncludeSubdirectories = true,
             Filter = "*.*",
@@ -23,12 +22,12 @@ public class DysonDriveWatcher
                            NotifyFilters.LastWrite
         };
 
-        _watcher.Created += (s, e) => HandleEvent(e.FullPath, () => OnCreated?.Invoke(e.FullPath));
-        _watcher.Changed += (s, e) => HandleEvent(e.FullPath, () => OnChanged?.Invoke(e.FullPath));
-        _watcher.Deleted += (s, e) => HandleEvent(e.FullPath, () => OnDeleted?.Invoke(e.FullPath));
-        _watcher.Renamed += (s, e) => HandleEvent(e.FullPath, () => OnRenamed?.Invoke(e.OldFullPath, e.FullPath));
+        watcher.Created += (s, e) => HandleEvent(e.FullPath, () => OnCreated?.Invoke(e.FullPath));
+        watcher.Changed += (s, e) => HandleEvent(e.FullPath, () => OnChanged?.Invoke(e.FullPath));
+        watcher.Deleted += (s, e) => HandleEvent(e.FullPath, () => OnDeleted?.Invoke(e.FullPath));
+        watcher.Renamed += (s, e) => HandleEvent(e.FullPath, () => OnRenamed?.Invoke(e.OldFullPath, e.FullPath));
 
-        _watcher.EnableRaisingEvents = true;
+        watcher.EnableRaisingEvents = true;
     }
 
     private void HandleEvent(string path, Action action)
@@ -36,11 +35,8 @@ public class DysonDriveWatcher
         var now = DateTime.Now;
 
         // Debounce: evita eventos duplicados
-        if (_eventCache.TryGetValue(path, out var lastEvent))
-        {
-            if ((now - lastEvent).TotalMilliseconds < 200)
-                return;
-        }
+        if (_eventCache.TryGetValue(path, out var lastEvent) && (now - lastEvent).TotalMilliseconds < 200)
+            return;
 
         _eventCache[path] = now;
         action();

@@ -1,15 +1,12 @@
 ﻿using DysonDrive.Models;
 using DysonDrive.Services;
 
-using System.Runtime.CompilerServices;
-
-var fileService = new FileScannerService();
-
+#if DEBUG
 while(true)
 {
     Console.WriteLine("Enter the directory path to scan:");
     string path = Console.ReadLine() ?? "";
-    var result = fileService.ScanDirectory(path);
+    var result = FileScannerService.ScanDirectory(path);
     PrintFileNode(result);
 }
 
@@ -24,3 +21,6 @@ static void PrintFileNode(FileNodeModel node, int indent = 0)
         PrintFileNode(child, indent + 1);
     }
 }
+#else
+Console.WriteLine("This application is only available in DEBUG mode.");
+#endif

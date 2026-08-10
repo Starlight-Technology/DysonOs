@@ -11,7 +11,7 @@ public class FileNodeModel
     public bool IsDirectory { get; set; }
     public long? Size { get; set; }
     public DateTime LastModified { get; set; }
-    public List<FileNodeModel> Children { get; set; } = new();
+    public List<FileNodeModel> Children { get; set; } = [];
     public bool Accessible { get; set; } = true;
     public string? Error { get; set; }
 }

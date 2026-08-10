@@ -12,7 +12,11 @@ public class FileNodeEntity
     public bool IsDirectory { get; set; }
     public long? Size { get; set; }
     public DateTime LastModified { get; set; }
-    public List<FileNodeEntity> Children { get; set; } = new();
     public bool Accessible { get; set; } = true;
     public string? Error { get; set; }
+
+    // Relação pai-filho
+    public Guid? ParentId { get; set; }
+    public FileNodeEntity? Parent { get; set; }
+    public List<FileNodeEntity> Children { get; set; } = [];
 }
