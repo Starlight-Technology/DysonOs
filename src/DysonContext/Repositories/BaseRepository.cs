@@ -1,8 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DysonContext.Interface;
+
+using Microsoft.EntityFrameworkCore;
 
 namespace DysonContext.Repository;
 
-public class BaseRepository<T> where T : class
+public class BaseRepository<T> : IBaseRepository<T>
+where T : class
 {
     private readonly IContext _context;
     private readonly DbSet<T> _dbSet;
@@ -15,7 +18,7 @@ public class BaseRepository<T> where T : class
 
     // 🔎 Buscar por Id
     public async Task<T?> GetItemAsync(Guid id, CancellationToken cancellationToken = default)
-    {       
+    {
         return await _dbSet.FindAsync([id], cancellationToken);
     }
 

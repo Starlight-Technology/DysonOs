@@ -19,4 +19,7 @@ public class FileNodeEntity
     public Guid? ParentId { get; set; }
     public FileNodeEntity? Parent { get; set; }
     public List<FileNodeEntity> Children { get; set; } = [];
+
+    public Guid OwnerId { get; set; }
+    public UserEntity Owner { get; set; }
 }

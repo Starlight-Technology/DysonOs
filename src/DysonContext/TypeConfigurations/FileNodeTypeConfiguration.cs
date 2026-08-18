@@ -22,5 +22,10 @@ public class FileNodeTypeConfiguration : IEntityTypeConfiguration<FileNodeEntity
                .WithOne(fn => fn.Parent)
                .HasForeignKey(fn => fn.ParentId)
                .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasOne(fn=>fn.Owner)
+               .WithMany(u => u.FileNodes)
+               .HasForeignKey(fn => fn.OwnerId)
+               .OnDelete(DeleteBehavior.Cascade);
     }
 }
