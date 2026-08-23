@@ -14,7 +14,7 @@ public class UserEntity
     // Senha criptografada armazenada no banco
     public string PasswordHash { get; private set; } = string.Empty;
 
-    public ICollection<FileNodeEntity> FileNodes { get; set; } = new List<FileNodeEntity>();
+    public ICollection<FileNodeEntity> FileNodes { get; set; } = [];
 
     // 🔒 Define a senha e gera o hash
     public void SetPassword(string password)

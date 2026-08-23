@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="nuget.config" />
+  </Folder>
   <Folder Name="/src/">
     <Project Path="src/DysonAgents/DysonAgents.csproj" Id="8b7754ca-0d14-45c5-a150-b89dce4f8ed0" />
     <Project Path="src/DysonCLI/DysonCLI.csproj" Id="297461d1-1c2a-4017-a3c0-408211645ddf" />
@@ -16,4 +19,5 @@
     <Project Path="src/DysonShared/DysonShared.csproj" Id="fc16644e-edb0-42ac-92b9-309a49776f03" />
     <Project Path="src/DysonStreamEngine/DysonStreamEngine.csproj" Id="af365074-f98e-45b1-b597-d67bbfba38f6" />
   </Folder>
+  <Project Path="src/DysonModels/DysonModels.csproj" Id="68b4f3b7-dd38-479a-a205-951d3cfafdb3" />
 </Solution>

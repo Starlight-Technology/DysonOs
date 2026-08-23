@@ -1,0 +1,16 @@
+﻿@using DysonHub.Shared.Services
+@using DysonModels
+@rendermode InteractiveServer
+@inject DrawerStateService DrawerState
+
+<CoronaPageHeader Title="Starlight Tecnologia"
+                  ShowMenuButton="true"
+                  NavItems="@MenuItens.Items"
+                  OnMenuClick="ToggleDrawer" />
+
+@code {
+    private void ToggleDrawer()
+    {
+        DrawerState.Toggle();
+    }
+}

@@ -1,0 +1,44 @@
+﻿@namespace Starlight.Main.Components.Layout
+@rendermode InteractiveServer
+@implements IDisposable
+@using Corona.Components.Models
+@using DysonHub.Shared.Services
+@using DysonModels
+@inject DrawerStateService DrawerState
+
+<CoronaDrawer Open="_isOpen"
+              OpenChanged="OnDrawerChanged"
+              Overlay="true"
+              Width="300px">
+    <CoronaStack Spacing="1rem" FullWidth="true">
+        <p class="docs-drawer-title">Starlight Tecnologia</p>
+        <CoronaNavMenu Items="@MenuItens.Items" />
+    </CoronaStack>
+</CoronaDrawer>
+
+@code {
+    private bool _isOpen;
+
+    protected override void OnInitialized()
+    {
+        DrawerState.OnChange += HandleStateChanged;
+        _isOpen = DrawerState.IsOpen;
+    }
+
+    private void HandleStateChanged()
+    {
+        _isOpen = DrawerState.IsOpen;
+        InvokeAsync(StateHasChanged);
+    }
+
+    private Task OnDrawerChanged(bool open)
+    {
+        DrawerState.SetOpen(open);
+        return Task.CompletedTask;
+    }
+
+    public void Dispose()
+    {
+        DrawerState.OnChange -= HandleStateChanged;
+    }
+}

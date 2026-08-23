@@ -1,4 +1,8 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Corona.Theming;
+
+using DysonHub.Shared.Services;
+
+using Microsoft.Extensions.Logging;
 
 namespace DysonHub;
 
@@ -20,6 +24,9 @@ public static class MauiProgram
         builder.Services.AddBlazorWebViewDeveloperTools();
         builder.Logging.AddDebug();
 #endif
+
+        builder.Services.AddCoronaTheming(CoronaThemes.Dark(DysonTheme.Overrides));
+        builder.Services.AddScoped<DrawerStateService>();
 
         return builder.Build();
     }

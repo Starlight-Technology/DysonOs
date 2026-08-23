@@ -11,7 +11,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Corona" Version="1.0.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="10.0.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\DysonModels\DysonModels.csproj" />
   </ItemGroup>
 
 </Project>
